@@ -410,7 +410,7 @@ export default function Home() {
           href="https://lin.ee/bXqTdwr" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="fixed right-6 bottom-6 z-50 w-14 h-14 bg-[#06C755] hover:bg-[#05b34c] rounded-full shadow-[0_0_20px_rgba(6,199,85,0.4)] hover:scale-110 hover:shadow-[0_0_30px_rgba(6,199,85,0.6)] transition-all flex items-center justify-center group"
+          className="fixed right-6 bottom-24 z-50 w-14 h-14 bg-[#06C755] hover:bg-[#05b34c] rounded-full shadow-[0_0_20px_rgba(6,199,85,0.4)] hover:scale-110 hover:shadow-[0_0_30px_rgba(6,199,85,0.6)] transition-all flex items-center justify-center group"
           title="加入LINE官方帳號"
         >
           <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
