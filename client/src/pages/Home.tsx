@@ -66,56 +66,100 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="relative z-10 container mx-auto px-4 py-8 space-y-8">
+      <main className="relative z-10 container mx-auto px-4 py-8 space-y-12">
         
+        {/* Hero Section */}
+        <section className="relative py-12 md:py-20 overflow-hidden rounded-lg border border-primary/20 bg-background/50 backdrop-blur-sm">
+          <div className="absolute inset-0 bg-[url('/images/hero-bg.jpg')] bg-cover bg-center opacity-30 mix-blend-overlay" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent" />
+          
+          <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/30 text-primary text-xs font-bold tracking-widest uppercase mb-6 animate-pulse">
+              <span className="w-2 h-2 rounded-full bg-primary" />
+              特別預算案 2026-2033
+            </div>
+            
+            <h1 className="text-5xl md:text-7xl font-bold text-white mb-4 tracking-tight leading-tight">
+              1.25兆 <span className="text-primary">國防特別預算</span>
+            </h1>
+            
+            <h2 className="text-2xl md:text-3xl font-light text-white/80 mb-8 tracking-wide">
+              打造台灣之盾與不對稱戰力
+            </h2>
+            
+            <p className="text-lg text-muted-foreground max-w-2xl mb-10 leading-relaxed border-l-4 border-primary/50 pl-6">
+              深入解析台灣史上最大規模國防投資，追蹤最新軍購案，以及尚未交付的關鍵裝備。
+              透過數據視覺化，揭示國防自主與外購的真實比例，並探討<span className="text-destructive font-bold">預算細節未對國民說明</span>的潛在風險。
+            </p>
+            
+            <div className="flex flex-wrap gap-4">
+              <button 
+                onClick={() => setActiveTab("budget")}
+                className="px-8 py-4 bg-primary text-primary-foreground font-bold uppercase tracking-widest hover:bg-primary/90 transition-all clip-path-slant flex items-center gap-2 group"
+              >
+                探索預算分配 <Target className="w-4 h-4 group-hover:rotate-90 transition-transform" />
+              </button>
+              <button 
+                onClick={() => setActiveTab("sales")}
+                className="px-8 py-4 bg-transparent border border-primary/50 text-primary font-bold uppercase tracking-widest hover:bg-primary/10 transition-all clip-path-slant flex items-center gap-2"
+              >
+                查看軍購清單 <Database className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+          
+          {/* Decorative Elements */}
+          <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1/3 h-full opacity-20 pointer-events-none hidden lg:block">
+            <div className="w-full h-full bg-[url('/images/tactical-map.jpg')] bg-contain bg-no-repeat bg-center mix-blend-screen" />
+          </div>
+        </section>
+
         {/* Key Metrics Row */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <DashboardCard title="國防特別預算總額" icon={<Database className="w-5 h-5" />}>
+          <DashboardCard title="總預算規模" icon={<Database className="w-5 h-5" />}>
             <div className="flex flex-col h-full justify-between">
               <div className="text-4xl font-mono font-bold text-primary drop-shadow-[0_0_10px_rgba(0,240,255,0.5)]">
                 NT$ 1.25 <span className="text-lg">兆</span>
               </div>
-              <div className="w-full bg-secondary h-2 mt-4 rounded-full overflow-hidden">
-                <div className="bg-primary h-full w-[15%] animate-[pulse_3s_infinite]" />
+              <div className="space-y-1 mt-4">
+                <div className="flex justify-between text-xs text-muted-foreground">
+                  <span>2026-2033 (8年)</span>
+                  <span className="text-green-400">+200% vs 前次</span>
+                </div>
+                <div className="w-full bg-secondary h-1 rounded-full overflow-hidden">
+                  <div className="bg-primary h-full w-full animate-[pulse_3s_infinite]" />
+                </div>
               </div>
-              <p className="text-xs text-muted-foreground mt-2">執行期程: 2026-2033</p>
             </div>
           </DashboardCard>
 
-          <DashboardCard title="2025最新軍售" icon={<Target className="w-5 h-5" />}>
+          <DashboardCard title="對美軍購占比" icon={<Globe className="w-5 h-5" />}>
+            <div className="flex flex-col h-full justify-between">
+              <div className="text-4xl font-mono font-bold text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]">
+                76%
+              </div>
+              <p className="text-sm text-muted-foreground mt-2">約 NT$ 9,500 億</p>
+              <p className="text-xs text-primary/70 mt-1">高度依賴美方</p>
+            </div>
+          </DashboardCard>
+
+          <DashboardCard title="最新軍售案" icon={<Target className="w-5 h-5" />}>
             <div className="flex flex-col h-full justify-between">
               <div className="text-4xl font-mono font-bold text-green-400 drop-shadow-[0_0_10px_rgba(74,222,128,0.5)]">
                 NT$ 3,500 <span className="text-lg">億</span>
               </div>
-              <p className="text-sm text-green-400/80 mt-2">USD 111 億 (歷史新高)</p>
-              <p className="text-xs text-muted-foreground mt-1">包含HIMARS、M109A7等8項</p>
+              <p className="text-sm text-green-400/80 mt-2">2025.12 批准</p>
+              <p className="text-xs text-muted-foreground mt-1">史上最大單筆</p>
             </div>
           </DashboardCard>
 
           <DashboardCard title="未交付積壓" icon={<AlertTriangle className="w-5 h-5" />} variant="danger">
             <div className="flex flex-col h-full justify-between">
               <div className="text-4xl font-mono font-bold text-destructive drop-shadow-[0_0_10px_rgba(255,42,42,0.5)]">
-                NT$ 6,825 <span className="text-lg">億</span>
+                NT$ 6,880 <span className="text-lg">億</span>
               </div>
-              <p className="text-sm text-destructive/80 mt-2">USD 215 億 (嚴重延遲)</p>
-              <p className="text-xs text-muted-foreground mt-1">F-16V延遲至2028年</p>
-            </div>
-          </DashboardCard>
-
-          <DashboardCard title="系統狀態" icon={<Zap className="w-5 h-5" />}>
-            <div className="grid grid-cols-2 gap-2 h-full">
-              <div className="bg-primary/10 p-2 rounded border border-primary/20 flex flex-col items-center justify-center">
-                <span className="text-xs text-muted-foreground uppercase">DEFCON</span>
-                <span className="text-xl font-bold text-primary">3</span>
-              </div>
-              <div className="bg-primary/10 p-2 rounded border border-primary/20 flex flex-col items-center justify-center">
-                <span className="text-xs text-muted-foreground uppercase">網路</span>
-                <span className="text-xl font-bold text-green-400">SECURE</span>
-              </div>
-              <div className="col-span-2 bg-primary/5 p-2 rounded border border-primary/10 flex items-center justify-between px-4">
-                <span className="text-xs text-muted-foreground uppercase">最後更新</span>
-                <span className="text-xs font-mono text-primary">2026.01.08</span>
-              </div>
+              <p className="text-sm text-destructive/80 mt-2">截至 2025.10</p>
+              <p className="text-xs text-muted-foreground mt-1">產能嚴重不足</p>
             </div>
           </DashboardCard>
         </div>
@@ -265,26 +309,54 @@ export default function Home() {
               </button>
             </DashboardCard>
 
-            {/* Controversy Highlight */}
-            <div className="bg-gradient-to-br from-destructive/20 to-background border border-destructive/50 p-6 rounded relative overflow-hidden">
-              <div className="absolute -right-10 -top-10 w-32 h-32 bg-destructive/20 blur-3xl rounded-full" />
-              <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                <AlertTriangle className="text-destructive" /> 核心爭議分析
+            {/* Controversy Highlight - Enhanced */}
+            <div className="bg-gradient-to-br from-destructive/10 to-background border border-destructive/30 p-6 rounded relative overflow-hidden">
+              <div className="absolute -right-10 -top-10 w-32 h-32 bg-destructive/10 blur-3xl rounded-full" />
+              <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2 border-b border-destructive/30 pb-4">
+                <AlertTriangle className="text-destructive w-6 h-6" /> 四大核心爭議點
               </h3>
-              <ul className="space-y-3">
-                <li className="flex gap-2 text-sm text-muted-foreground">
-                  <span className="text-destructive font-bold">01.</span>
-                  <span>預算透明度不足，部分項目金額未公開</span>
-                </li>
-                <li className="flex gap-2 text-sm text-muted-foreground">
-                  <span className="text-destructive font-bold">02.</span>
-                  <span>F-16V等關鍵裝備嚴重延遲，影響戰力銜接</span>
-                </li>
-                <li className="flex gap-2 text-sm text-muted-foreground">
-                  <span className="text-destructive font-bold">03.</span>
-                  <span>政治分歧導致預算審查僵局，6度遭擋</span>
-                </li>
-              </ul>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="bg-destructive/5 border border-destructive/20 p-4 rounded hover:bg-destructive/10 transition-colors">
+                  <h4 className="text-destructive font-bold mb-2 flex items-center gap-2">
+                    <span className="text-xs border border-destructive px-1 rounded">CRITICAL</span>
+                    資訊透明度不足
+                  </h4>
+                  <p className="text-sm text-muted-foreground">
+                    僅用6張A4紙說明1.25兆元預算，缺乏具體採購清單與金額分配細節，引發國會強烈質疑。
+                  </p>
+                </div>
+                
+                <div className="bg-orange-500/5 border border-orange-500/20 p-4 rounded hover:bg-orange-500/10 transition-colors">
+                  <h4 className="text-orange-500 font-bold mb-2 flex items-center gap-2">
+                    <span className="text-xs border border-orange-500 px-1 rounded">HIGH</span>
+                    國防自主比例過低
+                  </h4>
+                  <p className="text-sm text-muted-foreground">
+                    美方獲76%預算份額，中科院與國內廠商僅占24%，技術轉移與產業效益受限。
+                  </p>
+                </div>
+                
+                <div className="bg-destructive/5 border border-destructive/20 p-4 rounded hover:bg-destructive/10 transition-colors">
+                  <h4 className="text-destructive font-bold mb-2 flex items-center gap-2">
+                    <span className="text-xs border border-destructive px-1 rounded">CRITICAL</span>
+                    維持費用黑洞
+                  </h4>
+                  <p className="text-sm text-muted-foreground">
+                    採購費1.25兆，未來全壽期維持費預估達4.5兆元，將對國家財政造成長期沉重負擔。
+                  </p>
+                </div>
+                
+                <div className="bg-orange-500/5 border border-orange-500/20 p-4 rounded hover:bg-orange-500/10 transition-colors">
+                  <h4 className="text-orange-500 font-bold mb-2 flex items-center gap-2">
+                    <span className="text-xs border border-orange-500 px-1 rounded">HIGH</span>
+                    交付與整合風險
+                  </h4>
+                  <p className="text-sm text-muted-foreground">
+                    美國產能不足導致6,880億元軍購積壓，且IBCS等新系統與現有裝備整合難度極高。
+                  </p>
+                </div>
+              </div>
             </div>
 
           </div>
