@@ -1,3 +1,5 @@
+import { useAuth } from "@/_core/hooks/useAuth";
+import { CommentSection } from "@/components/CommentSection";
 import { DashboardCard } from "@/components/DashboardCard";
 import { BacklogView } from "@/components/views/BacklogView";
 import { BudgetView } from "@/components/views/BudgetView";
@@ -9,6 +11,10 @@ import { useState } from "react";
 import { Bar, BarChart, Cell, Pie, PieChart as RechartsPieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 export default function Home() {
+  // The userAuth hooks provides authentication state
+  // To implement login/logout functionality, simply call logout() or redirect to getLoginUrl()
+  let { user, loading, error, isAuthenticated, logout } = useAuth();
+
   const [activeTab, setActiveTab] = useState<"overview" | "budget" | "sales" | "backlog">("overview");
 
   // Prepare chart data for overview
@@ -370,6 +376,11 @@ export default function Home() {
         {activeTab === "budget" && <BudgetView />}
         {activeTab === "sales" && <SalesView />}
         {activeTab === "backlog" && <BacklogView />}
+
+        {/* Comment Section - Always visible at bottom */}
+        <section className="mt-16 pt-12 border-t border-primary/20">
+          <CommentSection />
+        </section>
 
         {/* Fixed Donate Button */}
         <a 
