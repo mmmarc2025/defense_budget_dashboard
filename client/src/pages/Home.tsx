@@ -87,11 +87,11 @@ export default function Home() {
             </h1>
             
             <h2 className="text-2xl md:text-3xl font-light text-white/80 mb-8 tracking-wide">
-              打造台灣之盾與不對稱戰力
+              如何打造台灣之盾與不對稱戰力
             </h2>
             
             <p className="text-lg text-muted-foreground max-w-2xl mb-10 leading-relaxed border-l-4 border-primary/50 pl-6">
-              深入解析台灣史上最大規模國防投資，追蹤最新軍購案，以及尚未交付的關鍵裝備。
+              深入分析台灣史上最大規模國防投資，為何六度遭藍白擋下?
               透過數據視覺化，揭示國防自主與外購的真實比例，並探討<span className="text-destructive font-bold">預算細節未對國民說明</span>的潛在風險。
             </p>
             
