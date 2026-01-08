@@ -11,6 +11,9 @@
 - [x] 網友留言功能（含防機器人灌水）
 - [x] 留言系統單元測試
 
-## In Progress
+## Completed Features (Continued)
 - [x] 右下角LINE官方帳號圓形按鈕（連結：https://lin.ee/bXqTdwr）
 - [x] 關鍵數據圖表旁的社群分享按鈕（Facebook、Twitter）
+
+## In Progress
+- [x] 調整「支持我們」按鈕為圓形設計（與LINE按鈕相同大小，只顯示愛心圖示）

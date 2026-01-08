@@ -399,10 +399,10 @@ export default function Home() {
           href="https://donate.stripe.com/aFacN69CWeQt7nt2Xi4Ja0h" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="fixed left-6 bottom-6 z-50 flex items-center gap-2 px-4 py-3 bg-primary text-primary-foreground font-bold rounded-full shadow-[0_0_20px_rgba(0,240,255,0.4)] hover:scale-105 hover:shadow-[0_0_30px_rgba(0,240,255,0.6)] transition-all animate-pulse"
+          className="fixed left-6 bottom-6 z-50 w-14 h-14 bg-primary hover:bg-primary/90 rounded-full shadow-[0_0_20px_rgba(0,240,255,0.4)] hover:scale-110 hover:shadow-[0_0_30px_rgba(0,240,255,0.6)] transition-all flex items-center justify-center group"
+          title="支持我們"
         >
-          <Heart className="w-5 h-5 fill-current" />
-          <span>支持我們</span>
+          <Heart className="w-7 h-7 fill-current text-primary-foreground" />
         </a>
 
         {/* Fixed LINE Official Account Button */}
