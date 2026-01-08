@@ -1,14 +1,17 @@
 import { DashboardCard } from "@/components/DashboardCard";
-import { budgetData, armsSales2025, backlogData, timelineEvents, newsFeed } from "@/lib/data";
+import { BacklogView } from "@/components/views/BacklogView";
+import { BudgetView } from "@/components/views/BudgetView";
+import { SalesView } from "@/components/views/SalesView";
+import { armsSales2025, backlogData, budgetData, newsFeed, timelineEvents } from "@/lib/data";
 import { formatCurrency } from "@/lib/utils";
-import { AlertTriangle, BarChart3, Clock, Database, Globe, Shield, Target, Zap } from "lucide-react";
+import { AlertTriangle, Clock, Database, Globe, Heart, PieChart, Shield, Target, Zap } from "lucide-react";
 import { useState } from "react";
-import { Bar, BarChart, Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { Bar, BarChart, Cell, Pie, PieChart as RechartsPieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<"overview" | "budget" | "sales" | "backlog">("overview");
 
-  // Prepare chart data
+  // Prepare chart data for overview
   const budgetChartData = budgetData.items.map(item => ({
     name: item.name.length > 8 ? item.name.substring(0, 8) + "..." : item.name,
     fullName: item.name,
@@ -23,7 +26,7 @@ export default function Home() {
   }));
 
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden font-sans selection:bg-primary/30 selection:text-primary-foreground">
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden font-sans selection:bg-primary/30 selection:text-primary-foreground pb-20">
       {/* Background Elements */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 bg-[url('/images/hero-bg.jpg')] bg-cover bg-center opacity-20 mix-blend-screen" />
@@ -165,202 +168,220 @@ export default function Home() {
         </div>
 
         {/* Main Content Area */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          
-          {/* Left Column: Charts & Analysis */}
-          <div className="lg:col-span-2 space-y-8">
+        {activeTab === "overview" && (
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
             
-            {/* Budget Breakdown */}
-            <DashboardCard title="1.25兆預算分配結構" icon={<PieChart className="w-5 h-5" />} className="min-h-[400px]">
-              <div className="h-[350px] w-full">
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={budgetChartData} layout="vertical" margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-                    <XAxis type="number" hide />
-                    <YAxis dataKey="name" type="category" width={150} tick={{ fill: '#94a3b8', fontSize: 12 }} />
-                    <Tooltip 
-                      contentStyle={{ backgroundColor: '#020b1c', borderColor: '#00f0ff', color: '#fff' }}
-                      formatter={(value: number) => formatCurrency(value)}
-                    />
-                    <Bar dataKey="value" radius={[0, 4, 4, 0]}>
-                      {budgetChartData.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.color} fillOpacity={0.8} />
-                      ))}
-                    </Bar>
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
-              <div className="mt-4 p-4 bg-destructive/10 border border-destructive/30 rounded">
-                <h4 className="text-destructive font-bold flex items-center gap-2">
-                  <AlertTriangle className="w-4 h-4" /> 核心爭議點：預算透明度
-                </h4>
-                <p className="text-sm text-muted-foreground mt-1">
-                  預算中包含約1000億元的「未詳細說明項目」，引發在野黨強烈質疑。國防部表示部分為機密預算，但立法院要求更詳細的說明。
-                </p>
-              </div>
-            </DashboardCard>
-
-            {/* Backlog Analysis */}
-            <DashboardCard title="未交付軍購積壓分析 (Top Items)" icon={<Clock className="w-5 h-5" />} variant="warning">
-              <div className="h-[300px] w-full">
-                <ResponsiveContainer width="100%" height="100%">
-                  <PieChart>
-                    <Pie
-                      data={backlogChartData}
-                      cx="50%"
-                      cy="50%"
-                      labelLine={false}
-                      label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                      outerRadius={100}
-                      fill="#8884d8"
-                      dataKey="value"
-                    >
-                      {backlogChartData.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={index === 0 ? '#ff2a2a' : `rgba(0, 240, 255, ${0.8 - index * 0.2})`} stroke="#020b1c" />
-                      ))}
-                    </Pie>
-                    <Tooltip formatter={(value: number) => formatCurrency(value)} contentStyle={{ backgroundColor: '#020b1c', borderColor: '#ff2a2a' }} />
-                  </PieChart>
-                </ResponsiveContainer>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                {backlogData.items.slice(0, 2).map((item, idx) => (
-                  <div key={idx} className="bg-background/50 p-3 rounded border border-white/10">
-                    <div className="flex justify-between items-start">
-                      <h5 className="font-bold text-primary">{item.name}</h5>
-                      <span className="text-xs bg-destructive text-destructive-foreground px-1 rounded">延遲 {item.delayYears} 年</span>
-                    </div>
-                    <div className="flex justify-between mt-2 text-sm">
-                      <span className="text-muted-foreground">原定: {item.originalDate}</span>
-                      <span className="text-destructive">預計: {item.expectedDate}</span>
-                    </div>
-                    <p className="text-xs text-muted-foreground mt-2 border-t border-white/10 pt-2">{item.reason}</p>
-                  </div>
-                ))}
-              </div>
-            </DashboardCard>
-
-            {/* Timeline */}
-            <DashboardCard title="關鍵時間軸" icon={<Clock className="w-5 h-5" />}>
-              <div className="relative border-l-2 border-primary/30 ml-3 space-y-8 py-4">
-                {timelineEvents.map((event, idx) => (
-                  <div key={idx} className="relative pl-6">
-                    <div className="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-background border-2 border-primary" />
-                    <span className="text-xs font-mono text-primary/70 block mb-1">{event.date}</span>
-                    <h4 className="text-lg font-bold text-white">{event.title}</h4>
-                    <p className="text-sm text-muted-foreground">{event.description}</p>
-                  </div>
-                ))}
-              </div>
-            </DashboardCard>
-
-          </div>
-
-          {/* Right Column: Lists & News */}
-          <div className="space-y-8">
-            
-            {/* Arms Sales List */}
-            <DashboardCard title="2025 美國軍售清單" icon={<Target className="w-5 h-5" />} className="max-h-[600px] overflow-y-auto custom-scrollbar">
-              <div className="space-y-4">
-                {armsSales2025.map((item) => (
-                  <div key={item.id} className="group relative bg-background/30 p-4 rounded border border-white/5 hover:border-primary/50 transition-colors">
-                    <div className="absolute top-0 right-0 bg-primary/20 text-primary text-[10px] px-2 py-1 rounded-bl">
-                      {item.status}
-                    </div>
-                    <h4 className="font-bold text-white group-hover:text-primary transition-colors">{item.name}</h4>
-                    <div className="flex justify-between items-end mt-2">
-                      <div>
-                        <p className="text-xs text-muted-foreground">{item.details}</p>
-                        <p className="text-xs text-primary/70 mt-1">交付: {item.deliveryDate}</p>
-                      </div>
-                      <div className="text-right">
-                        <div className="text-sm font-mono font-bold text-white">{formatCurrency(item.amountTWD)}</div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </DashboardCard>
-
-            {/* News Feed */}
-            <DashboardCard title="即時戰情快訊" icon={<Globe className="w-5 h-5" />}>
-              <div className="space-y-4">
-                {newsFeed.map((news) => (
-                  <a key={news.id} href={news.link} className="block group cursor-pointer">
-                    <div className="flex items-start gap-3">
-                      <div className="mt-1 min-w-[4px] h-[40px] bg-primary/30 group-hover:bg-primary transition-colors rounded-full" />
-                      <div>
-                        <h5 className="text-sm font-bold text-white group-hover:text-primary transition-colors line-clamp-2">
-                          {news.title}
-                        </h5>
-                        <div className="flex items-center gap-2 mt-1 text-[10px] text-muted-foreground">
-                          <span className="bg-white/10 px-1 rounded">{news.source}</span>
-                          <span>{news.date}</span>
-                        </div>
-                        <p className="text-xs text-muted-foreground mt-1 line-clamp-2 group-hover:text-white/70 transition-colors">
-                          {news.summary}
-                        </p>
-                      </div>
-                    </div>
-                  </a>
-                ))}
-              </div>
-              <button className="w-full mt-4 py-2 text-xs text-center border border-primary/30 text-primary hover:bg-primary/10 transition-colors uppercase tracking-widest">
-                載入更多情報
-              </button>
-            </DashboardCard>
-
-            {/* Controversy Highlight - Enhanced */}
-            <div className="bg-gradient-to-br from-destructive/10 to-background border border-destructive/30 p-6 rounded relative overflow-hidden">
-              <div className="absolute -right-10 -top-10 w-32 h-32 bg-destructive/10 blur-3xl rounded-full" />
-              <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2 border-b border-destructive/30 pb-4">
-                <AlertTriangle className="text-destructive w-6 h-6" /> 四大核心爭議點
-              </h3>
+            {/* Left Column: Charts & Analysis */}
+            <div className="lg:col-span-2 space-y-8">
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="bg-destructive/5 border border-destructive/20 p-4 rounded hover:bg-destructive/10 transition-colors">
-                  <h4 className="text-destructive font-bold mb-2 flex items-center gap-2">
-                    <span className="text-xs border border-destructive px-1 rounded">CRITICAL</span>
-                    資訊透明度不足
+              {/* Budget Breakdown */}
+              <DashboardCard title="1.25兆預算分配結構" icon={<PieChart className="w-5 h-5" />} className="min-h-[400px]">
+                <div className="h-[350px] w-full">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart data={budgetChartData} layout="vertical" margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+                      <XAxis type="number" hide />
+                      <YAxis dataKey="name" type="category" width={150} tick={{ fill: '#94a3b8', fontSize: 12 }} />
+                      <Tooltip 
+                        contentStyle={{ backgroundColor: '#020b1c', borderColor: '#00f0ff', color: '#fff' }}
+                        formatter={(value: number) => formatCurrency(value)}
+                      />
+                      <Bar dataKey="value" radius={[0, 4, 4, 0]}>
+                        {budgetChartData.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={entry.color} fillOpacity={0.8} />
+                        ))}
+                      </Bar>
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+                <div className="mt-4 p-4 bg-destructive/10 border border-destructive/30 rounded">
+                  <h4 className="text-destructive font-bold flex items-center gap-2">
+                    <AlertTriangle className="w-4 h-4" /> 核心爭議點：預算透明度
                   </h4>
-                  <p className="text-sm text-muted-foreground">
-                    僅用6張A4紙說明1.25兆元預算，缺乏具體採購清單與金額分配細節，引發國會強烈質疑。
+                  <p className="text-sm text-muted-foreground mt-1">
+                    預算中包含約1000億元的「未詳細說明項目」，引發在野黨強烈質疑。國防部表示部分為機密預算，但立法院要求更詳細的說明。
                   </p>
                 </div>
-                
-                <div className="bg-orange-500/5 border border-orange-500/20 p-4 rounded hover:bg-orange-500/10 transition-colors">
-                  <h4 className="text-orange-500 font-bold mb-2 flex items-center gap-2">
-                    <span className="text-xs border border-orange-500 px-1 rounded">HIGH</span>
-                    國防自主比例過低
-                  </h4>
-                  <p className="text-sm text-muted-foreground">
-                    美方獲76%預算份額，中科院與國內廠商僅占24%，技術轉移與產業效益受限。
-                  </p>
+              </DashboardCard>
+
+              {/* Backlog Analysis */}
+              <DashboardCard title="未交付軍購積壓分析 (Top Items)" icon={<Clock className="w-5 h-5" />} variant="warning">
+                <div className="h-[300px] w-full">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <RechartsPieChart>
+                      <Pie
+                        data={backlogChartData}
+                        cx="50%"
+                        cy="50%"
+                        labelLine={false}
+                        label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                        outerRadius={100}
+                        fill="#8884d8"
+                        dataKey="value"
+                      >
+                        {backlogChartData.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={index === 0 ? '#ff2a2a' : `rgba(0, 240, 255, ${0.8 - index * 0.2})`} stroke="#020b1c" />
+                        ))}
+                      </Pie>
+                      <Tooltip formatter={(value: number) => formatCurrency(value)} contentStyle={{ backgroundColor: '#020b1c', borderColor: '#ff2a2a' }} />
+                    </RechartsPieChart>
+                  </ResponsiveContainer>
                 </div>
-                
-                <div className="bg-destructive/5 border border-destructive/20 p-4 rounded hover:bg-destructive/10 transition-colors">
-                  <h4 className="text-destructive font-bold mb-2 flex items-center gap-2">
-                    <span className="text-xs border border-destructive px-1 rounded">CRITICAL</span>
-                    維持費用黑洞
-                  </h4>
-                  <p className="text-sm text-muted-foreground">
-                    採購費1.25兆，未來全壽期維持費預估達4.5兆元，將對國家財政造成長期沉重負擔。
-                  </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                  {backlogData.items.slice(0, 2).map((item, idx) => (
+                    <div key={idx} className="bg-background/50 p-3 rounded border border-white/10">
+                      <div className="flex justify-between items-start">
+                        <h5 className="font-bold text-primary">{item.name}</h5>
+                        <span className="text-xs bg-destructive text-destructive-foreground px-1 rounded">延遲 {item.delayYears} 年</span>
+                      </div>
+                      <div className="flex justify-between mt-2 text-sm">
+                        <span className="text-muted-foreground">原定: {item.originalDate}</span>
+                        <span className="text-destructive">預計: {item.expectedDate}</span>
+                      </div>
+                      <p className="text-xs text-muted-foreground mt-2 border-t border-white/10 pt-2">{item.reason}</p>
+                    </div>
+                  ))}
                 </div>
-                
-                <div className="bg-orange-500/5 border border-orange-500/20 p-4 rounded hover:bg-orange-500/10 transition-colors">
-                  <h4 className="text-orange-500 font-bold mb-2 flex items-center gap-2">
-                    <span className="text-xs border border-orange-500 px-1 rounded">HIGH</span>
-                    交付與整合風險
-                  </h4>
-                  <p className="text-sm text-muted-foreground">
-                    美國產能不足導致6,880億元軍購積壓，且IBCS等新系統與現有裝備整合難度極高。
-                  </p>
+              </DashboardCard>
+
+              {/* Timeline */}
+              <DashboardCard title="關鍵時間軸" icon={<Clock className="w-5 h-5" />}>
+                <div className="relative border-l-2 border-primary/30 ml-3 space-y-8 py-4">
+                  {timelineEvents.map((event, idx) => (
+                    <div key={idx} className="relative pl-6">
+                      <div className="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-background border-2 border-primary" />
+                      <span className="text-xs font-mono text-primary/70 block mb-1">{event.date}</span>
+                      <h4 className="text-lg font-bold text-white">{event.title}</h4>
+                      <p className="text-sm text-muted-foreground">{event.description}</p>
+                    </div>
+                  ))}
                 </div>
-              </div>
+              </DashboardCard>
+
             </div>
 
+            {/* Right Column: Lists & News */}
+            <div className="space-y-8">
+              
+              {/* Arms Sales List */}
+              <DashboardCard title="2025 美國軍售清單" icon={<Target className="w-5 h-5" />} className="max-h-[600px] overflow-y-auto custom-scrollbar">
+                <div className="space-y-4">
+                  {armsSales2025.map((item) => (
+                    <div key={item.id} className="group relative bg-background/30 p-4 rounded border border-white/5 hover:border-primary/50 transition-colors">
+                      <div className="absolute top-0 right-0 bg-primary/20 text-primary text-[10px] px-2 py-1 rounded-bl">
+                        {item.status}
+                      </div>
+                      <h4 className="font-bold text-white group-hover:text-primary transition-colors">{item.name}</h4>
+                      <div className="flex justify-between items-end mt-2">
+                        <div>
+                          <p className="text-xs text-muted-foreground">{item.details}</p>
+                          <p className="text-xs text-primary/70 mt-1">交付: {item.deliveryDate}</p>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-sm font-mono font-bold text-white">{formatCurrency(item.amountTWD)}</div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </DashboardCard>
+
+              {/* News Feed */}
+              <DashboardCard title="即時戰情快訊" icon={<Globe className="w-5 h-5" />}>
+                <div className="space-y-4">
+                  {newsFeed.map((news) => (
+                    <a key={news.id} href={news.link} className="block group cursor-pointer">
+                      <div className="flex items-start gap-3">
+                        <div className="mt-1 min-w-[4px] h-[40px] bg-primary/30 group-hover:bg-primary transition-colors rounded-full" />
+                        <div>
+                          <h5 className="text-sm font-bold text-white group-hover:text-primary transition-colors line-clamp-2">
+                            {news.title}
+                          </h5>
+                          <div className="flex items-center gap-2 mt-1 text-[10px] text-muted-foreground">
+                            <span className="bg-white/10 px-1 rounded">{news.source}</span>
+                            <span>{news.date}</span>
+                          </div>
+                          <p className="text-xs text-muted-foreground mt-1 line-clamp-2 group-hover:text-white/70 transition-colors">
+                            {news.summary}
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+                <button className="w-full mt-4 py-2 text-xs text-center border border-primary/30 text-primary hover:bg-primary/10 transition-colors uppercase tracking-widest">
+                  載入更多情報
+                </button>
+              </DashboardCard>
+
+              {/* Controversy Highlight - Enhanced */}
+              <div className="bg-gradient-to-br from-destructive/10 to-background border border-destructive/30 p-6 rounded relative overflow-hidden">
+                <div className="absolute -right-10 -top-10 w-32 h-32 bg-destructive/10 blur-3xl rounded-full" />
+                <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2 border-b border-destructive/30 pb-4">
+                  <AlertTriangle className="text-destructive w-6 h-6" /> 四大核心爭議點
+                </h3>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="bg-destructive/5 border border-destructive/20 p-4 rounded hover:bg-destructive/10 transition-colors">
+                    <h4 className="text-destructive font-bold mb-2 flex items-center gap-2">
+                      <span className="text-xs border border-destructive px-1 rounded">CRITICAL</span>
+                      資訊透明度不足
+                    </h4>
+                    <p className="text-sm text-muted-foreground">
+                      僅用6張A4紙說明1.25兆元預算，缺乏具體採購清單與金額分配細節，引發國會強烈質疑。
+                    </p>
+                  </div>
+                  
+                  <div className="bg-orange-500/5 border border-orange-500/20 p-4 rounded hover:bg-orange-500/10 transition-colors">
+                    <h4 className="text-orange-500 font-bold mb-2 flex items-center gap-2">
+                      <span className="text-xs border border-orange-500 px-1 rounded">HIGH</span>
+                      國防自主比例過低
+                    </h4>
+                    <p className="text-sm text-muted-foreground">
+                      美方獲76%預算份額，中科院與國內廠商僅占24%，技術轉移與產業效益受限。
+                    </p>
+                  </div>
+                  
+                  <div className="bg-destructive/5 border border-destructive/20 p-4 rounded hover:bg-destructive/10 transition-colors">
+                    <h4 className="text-destructive font-bold mb-2 flex items-center gap-2">
+                      <span className="text-xs border border-destructive px-1 rounded">CRITICAL</span>
+                      維持費用黑洞
+                    </h4>
+                    <p className="text-sm text-muted-foreground">
+                      採購費1.25兆，未來全壽期維持費預估達4.5兆元，將對國家財政造成長期沉重負擔。
+                    </p>
+                  </div>
+                  
+                  <div className="bg-orange-500/5 border border-orange-500/20 p-4 rounded hover:bg-orange-500/10 transition-colors">
+                    <h4 className="text-orange-500 font-bold mb-2 flex items-center gap-2">
+                      <span className="text-xs border border-orange-500 px-1 rounded">HIGH</span>
+                      交付與整合風險
+                    </h4>
+                    <p className="text-sm text-muted-foreground">
+                      美國產能不足導致6,880億元軍購積壓，且IBCS等新系統與現有裝備整合難度極高。
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
           </div>
-        </div>
+        )}
+
+        {activeTab === "budget" && <BudgetView />}
+        {activeTab === "sales" && <SalesView />}
+        {activeTab === "backlog" && <BacklogView />}
+
+        {/* Fixed Donate Button */}
+        <a 
+          href="https://donate.stripe.com/aFacN69CWeQt7nt2Xi4Ja0h" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="fixed left-6 bottom-6 z-50 flex items-center gap-2 px-4 py-3 bg-primary text-primary-foreground font-bold rounded-full shadow-[0_0_20px_rgba(0,240,255,0.4)] hover:scale-105 hover:shadow-[0_0_30px_rgba(0,240,255,0.6)] transition-all animate-pulse"
+        >
+          <Heart className="w-5 h-5 fill-current" />
+          <span>支持我們</span>
+        </a>
+
       </main>
     </div>
   );
