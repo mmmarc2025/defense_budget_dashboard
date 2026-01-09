@@ -410,11 +410,11 @@ export default function Home() {
               rel="noopener noreferrer"
               className="inline-flex flex-col items-center gap-4 p-6 bg-card/50 border border-primary/20 rounded-lg hover:border-primary/50 hover:bg-card/70 transition-all group"
             >
-              <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-primary/30 group-hover:border-primary transition-colors">
+              <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-primary/30 group-hover:border-primary transition-colors bg-white flex items-center justify-center">
                 <img 
                   src="/images/visionoffuture-logo.png" 
                   alt="直球對決" 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain p-2"
                 />
               </div>
               <div>

@@ -39,3 +39,6 @@
 - [x] 展示直球對決YouTube頻道頭像
 - [x] 顯示「YouTube直球對決」文字
 - [x] 連結至頻道：https://www.youtube.com/@visionoffuture-2028
+
+## Logo Display Fix
+- [x] 調整製作團隊區塊的logo CSS樣式，讓圖片完整填滿圓形區域
