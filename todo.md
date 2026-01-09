@@ -45,3 +45,6 @@
 
 ## Simplify Logo Display
 - [x] 移除圓形容器和白色背景，直接顯示圓形logo圖片
+
+## Update Logo Image
+- [x] 替換為使用者提供的新圓形icon圖片
