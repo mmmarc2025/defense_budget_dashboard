@@ -61,3 +61,6 @@
 
 ## Remove Bottom Padding
 - [x] 移除頁面底部的無效區域padding（80px）
+
+## Adjust Footer Margin
+- [x] 將footer的上方margin從mt-8改為mt-10
