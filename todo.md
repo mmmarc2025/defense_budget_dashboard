@@ -76,3 +76,6 @@
 - [x] 更新HTML標題與meta標籤
 - [x] 更新首頁主標題與副標題文案
 - [x] 調整相關描述文案以符合新主題定位
+
+## Update Open Graph Preview Image
+- [x] 重新生成OG預覽圖，使用新標題「被消失的防線」
