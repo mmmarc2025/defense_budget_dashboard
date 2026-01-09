@@ -64,3 +64,6 @@
 
 ## Adjust Footer Margin
 - [x] 將footer的上方margin從mt-8改為mt-10
+
+## Reduce Footer Bottom Padding
+- [x] 減少footer的下方padding，讓版權宣告更貼近網頁底部
