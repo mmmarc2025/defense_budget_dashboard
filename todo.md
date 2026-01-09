@@ -52,3 +52,6 @@
 ## Open Graph & Copyright
 - [x] 在index.html添加完整的Open Graph元標籤（og:title、og:description、og:image）
 - [x] 在網站最底部新增版權宣告：視角製作 © 2020
+
+## Update Copyright Year
+- [x] 將版權宣告年份從2020更新為2026

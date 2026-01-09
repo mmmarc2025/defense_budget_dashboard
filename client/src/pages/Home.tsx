@@ -430,7 +430,7 @@ export default function Home() {
         {/* Copyright Footer */}
         <footer className="mt-12 pt-8 pb-6 border-t border-primary/10 text-center">
           <p className="text-sm text-muted-foreground">
-            視角製作 © 2020
+            視角製作 © 2026
           </p>
         </footer>
 
