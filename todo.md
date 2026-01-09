@@ -42,3 +42,6 @@
 
 ## Logo Display Fix
 - [x] 調整製作團隊區塊的logo CSS樣式，讓圖片完整填滿圓形區域
+
+## Simplify Logo Display
+- [x] 移除圓形容器和白色背景，直接顯示圓形logo圖片
