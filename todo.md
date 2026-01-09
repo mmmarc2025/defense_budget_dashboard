@@ -15,5 +15,12 @@
 - [x] 右下角LINE官方帳號圓形按鈕（連結：https://lin.ee/bXqTdwr）
 - [x] 關鍵數據圖表旁的社群分享按鈕（Facebook、Twitter）
 
-## In Progress
+## Completed Features (Continued 2)
 - [x] 調整「支持我們」按鈕為圓形設計（與LINE按鈕相同大小，只顯示愛心圖示）
+- [x] 修正愛心按鈕位置，確保與LINE按鈕完全對齊
+
+## In Progress
+- [x] 修復首頁SEO問題：設定30-60字元的頁面標題
+- [x] 修復首頁SEO問題：新增50-160字元的meta描述
+- [x] 修復首頁SEO問題：加入關鍵字meta標籤
+- [x] 修復首頁SEO問題：優化Open Graph標籤以改善社群分享預覽
