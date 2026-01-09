@@ -7,6 +7,7 @@ import { BudgetView } from "@/components/views/BudgetView";
 import { SalesView } from "@/components/views/SalesView";
 import { armsSales2025, backlogData, budgetData, newsFeed, timelineEvents } from "@/lib/data";
 import { formatCurrency } from "@/lib/utils";
+import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 import { AlertTriangle, Clock, Database, Globe, Heart, PieChart, Shield, Target, Zap } from "lucide-react";
 import { useState } from "react";
 import { Bar, BarChart, Cell, Pie, PieChart as RechartsPieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
@@ -53,7 +54,9 @@ export default function Home() {
               <p className="text-[10px] text-primary/70 tracking-[0.2em] uppercase">Strategic Budget Analysis System</p>
             </div>
           </div>
-          <nav className="hidden md:flex gap-1">
+          <div className="flex items-center gap-4">
+            <ThemeSwitcher />
+            <nav className="hidden md:flex gap-1">
             {[
               { id: "overview", label: "總覽儀表板" },
               { id: "budget", label: "預算結構" },
@@ -73,6 +76,7 @@ export default function Home() {
               </button>
             ))}
           </nav>
+          </div>
         </div>
       </header>
 

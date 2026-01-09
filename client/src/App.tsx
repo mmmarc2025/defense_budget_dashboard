@@ -5,6 +5,8 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
+import { useEffect } from "react";
+import { applyTheme, getStoredTheme } from "@/lib/themes";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -24,6 +26,12 @@ function Router() {
 // - If you want to make theme switchable, pass `switchable` ThemeProvider and use `useTheme` hook
 
 function App() {
+  // 初始化主題
+  useEffect(() => {
+    const storedTheme = getStoredTheme();
+    applyTheme(storedTheme);
+  }, []);
+
   return (
     <ErrorBoundary>
       <ThemeProvider
