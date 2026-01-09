@@ -55,3 +55,6 @@
 
 ## Update Copyright Year
 - [x] 將版權宣告年份從2020更新為2026
+
+## Adjust Footer Spacing
+- [x] 調整footer的padding和margin，讓版權宣告區域更緊湊

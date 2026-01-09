@@ -428,7 +428,7 @@ export default function Home() {
         </section>
 
         {/* Copyright Footer */}
-        <footer className="mt-12 pt-8 pb-6 border-t border-primary/10 text-center">
+        <footer className="mt-8 pt-4 pb-4 border-t border-primary/10 text-center">
           <p className="text-sm text-muted-foreground">
             視角製作 © 2026
           </p>
