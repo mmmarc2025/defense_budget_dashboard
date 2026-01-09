@@ -71,3 +71,8 @@
 ## Create and Update Favicon
 - [x] 設計並生成favicon圖示
 - [x] 更新HTML中的favicon連結
+
+## Change Website Title to "被消失的防線"
+- [x] 更新HTML標題與meta標籤
+- [x] 更新首頁主標題與副標題文案
+- [x] 調整相關描述文案以符合新主題定位
