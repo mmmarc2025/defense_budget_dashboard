@@ -427,6 +427,13 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Copyright Footer */}
+        <footer className="mt-12 pt-8 pb-6 border-t border-primary/10 text-center">
+          <p className="text-sm text-muted-foreground">
+            視角製作 © 2020
+          </p>
+        </footer>
+
         {/* Fixed Donate Button */}
         <a 
           href="https://donate.stripe.com/aFacN69CWeQt7nt2Xi4Ja0h" 

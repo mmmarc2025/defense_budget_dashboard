@@ -48,3 +48,7 @@
 
 ## Update Logo Image
 - [x] 替換為使用者提供的新圓形icon圖片
+
+## Open Graph & Copyright
+- [x] 在index.html添加完整的Open Graph元標籤（og:title、og:description、og:image）
+- [x] 在網站最底部新增版權宣告：視角製作 © 2020
