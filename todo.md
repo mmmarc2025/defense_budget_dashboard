@@ -58,3 +58,6 @@
 
 ## Adjust Footer Spacing
 - [x] 調整footer的padding和margin，讓版權宣告區域更緊湊
+
+## Remove Bottom Padding
+- [x] 移除頁面底部的無效區域padding（80px）
