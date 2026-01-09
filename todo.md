@@ -67,3 +67,7 @@
 
 ## Reduce Footer Bottom Padding
 - [x] 減少footer的下方padding，讓版權宣告更貼近網頁底部
+
+## Create and Update Favicon
+- [x] 設計並生成favicon圖示
+- [x] 更新HTML中的favicon連結
