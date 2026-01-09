@@ -398,6 +398,37 @@ export default function Home() {
           <CommentSection />
         </section>
 
+        {/* Production Team Section */}
+        <section className="mt-16 pt-12 border-t border-primary/20">
+          <div className="max-w-2xl mx-auto text-center">
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-8 tracking-wider uppercase">
+              製作團隊
+            </h2>
+            <a 
+              href="https://www.youtube.com/@visionoffuture-2028" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex flex-col items-center gap-4 p-6 bg-card/50 border border-primary/20 rounded-lg hover:border-primary/50 hover:bg-card/70 transition-all group"
+            >
+              <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-primary/30 group-hover:border-primary transition-colors">
+                <img 
+                  src="/images/visionoffuture-logo.png" 
+                  alt="直球對決" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-primary group-hover:text-white transition-colors">
+                  YouTube直球對決
+                </h3>
+                <p className="text-sm text-muted-foreground mt-2">
+                  點擊前往頻道
+                </p>
+              </div>
+            </a>
+          </div>
+        </section>
+
         {/* Fixed Donate Button */}
         <a 
           href="https://donate.stripe.com/aFacN69CWeQt7nt2Xi4Ja0h" 

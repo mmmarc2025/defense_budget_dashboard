@@ -33,3 +33,9 @@
 - [x] 實作配色切換功能：紅藍對比
 - [x] 在UI中加入配色選擇器（header右側）
 - [x] 使用localStorage持久化主題選擇
+
+## Latest Request
+- [x] 在網站最下方新增「製作團隊」區塊
+- [x] 展示直球對決YouTube頻道頭像
+- [x] 顯示「YouTube直球對決」文字
+- [x] 連結至頻道：https://www.youtube.com/@visionoffuture-2028
