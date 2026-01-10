@@ -79,3 +79,7 @@
 
 ## Update Open Graph Preview Image
 - [x] 重新生成OG預覽圖，使用新標題「被消失的防線」
+
+## Fix Facebook OG Cache Issue
+- [x] 確認新的og-image.png已正確部署
+- [x] 在og:image URL後面加上版本參數繞過Facebook快取
