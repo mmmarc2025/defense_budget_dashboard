@@ -83,3 +83,10 @@
 ## Fix Facebook OG Cache Issue
 - [x] 確認新的og-image.png已正確部署
 - [x] 在og:image URL後面加上版本參數繞過Facebook快取
+
+## Implement Detailed Specs Modal
+- [x] 查看現有軍售清單資料結構
+- [x] 為每個軍售項目準備詳細規格資訊（介紹、技術規格、作戰用途等）
+- [x] 實作彈出視窗組件（Modal）
+- [x] 實作「查看詳細規格」按鈕點擊功能
+- [x] 測試所有項目的彈出視窗

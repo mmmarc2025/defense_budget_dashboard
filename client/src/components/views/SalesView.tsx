@@ -1,10 +1,24 @@
 import { DashboardCard } from "@/components/DashboardCard";
+import { WeaponDetailModal } from "@/components/WeaponDetailModal";
 import { armsSales2025 } from "@/lib/data";
 import { formatCurrency } from "@/lib/utils";
 import { CheckCircle2, Clock, ExternalLink, Shield, Target } from "lucide-react";
+import { useState } from "react";
 
 export function SalesView() {
   const totalAmount = armsSales2025.reduce((acc, item) => acc + item.amountTWD, 0);
+  const [selectedWeapon, setSelectedWeapon] = useState<typeof armsSales2025[0] | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleViewDetails = (weapon: typeof armsSales2025[0]) => {
+    setSelectedWeapon(weapon);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setTimeout(() => setSelectedWeapon(null), 300);
+  };
   
   return (
     <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -63,7 +77,10 @@ export function SalesView() {
               </div>
               
               <div className="mt-4 pt-4 border-t border-white/5">
-                <button className="w-full py-2 text-xs text-center border border-white/10 hover:bg-white/5 hover:border-primary/30 hover:text-primary transition-all rounded flex items-center justify-center gap-2">
+                <button 
+                  onClick={() => handleViewDetails(item)}
+                  className="w-full py-2 text-xs text-center border border-white/10 hover:bg-white/5 hover:border-primary/30 hover:text-primary transition-all rounded flex items-center justify-center gap-2"
+                >
                   查看詳細規格 <ExternalLink className="w-3 h-3" />
                 </button>
               </div>
@@ -71,6 +88,12 @@ export function SalesView() {
           </DashboardCard>
         ))}
       </div>
+
+      <WeaponDetailModal 
+        weapon={selectedWeapon}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+      />
     </div>
   );
 }
