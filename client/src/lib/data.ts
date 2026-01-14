@@ -17,6 +17,7 @@ export const armsSales2025 = [
   {
     id: 1,
     name: "HIMARS與ATACMS系統",
+    image: "/images/himars.jpg",
     amountUSD: 4050000000,
     amountTWD: 127575000000,
     details: "82套HIMARS發射器, 420枚ATACMS飛彈, 756枚精準導引火箭彈(GMLRS-U)",
@@ -35,6 +36,7 @@ export const armsSales2025 = [
   {
     id: 2,
     name: "M109A7自走榴彈砲",
+    image: "/images/m109a7.jpg",
     amountUSD: 4030000000,
     amountTWD: 126945000000,
     details: "60門榴彈砲, 4,080套精準導引套件",
@@ -53,6 +55,7 @@ export const armsSales2025 = [
   {
     id: 3,
     name: "Altius遊蕩彈藥無人機",
+    image: "/images/altius.jpg",
     amountUSD: 1100000000,
     amountTWD: 34650000000,
     details: "Altius-700M與Altius-600型號",
@@ -89,6 +92,7 @@ export const armsSales2025 = [
   {
     id: 5,
     name: "標槍(Javelin)飛彈",
+    image: "/images/javelin.jpg",
     amountUSD: 350000000,
     amountTWD: 11025000000,
     details: "1,050枚標槍飛彈",
@@ -107,6 +111,7 @@ export const armsSales2025 = [
   {
     id: 6,
     name: "TOW反坦克飛彈",
+    image: "/images/tow.jpg",
     amountUSD: 300000000,
     amountTWD: 9450000000,
     details: "1,545枚TOW 2B型飛彈",
@@ -125,6 +130,7 @@ export const armsSales2025 = [
   {
     id: 7,
     name: "AH-1W攻擊直升機備件",
+    image: "/images/ah1w.jpg",
     amountUSD: 96000000,
     amountTWD: 3024000000,
     details: "維護現有機隊",
@@ -143,6 +149,7 @@ export const armsSales2025 = [
   {
     id: 8,
     name: "魚叉(Harpoon)飛彈翻新套件",
+    image: "/images/harpoon.jpg",
     amountUSD: 164000000,
     amountTWD: 5166000000,
     details: "強化海軍反艦能力",

@@ -9,6 +9,7 @@ interface WeaponSpec {
 interface WeaponDetail {
   id: number;
   name: string;
+  image?: string;
   amountUSD: number;
   amountTWD: number;
   details: string;
@@ -65,6 +66,17 @@ export function WeaponDetailModal({ weapon, isOpen, onClose }: WeaponDetailModal
 
         {/* Content */}
         <div className="p-6 space-y-6">
+          {/* Weapon Image */}
+          {weapon.image && (
+            <div className="relative w-full h-64 rounded-lg overflow-hidden border border-primary/20">
+              <img 
+                src={weapon.image} 
+                alt={weapon.name}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          )}
+
           {/* Amount Info */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="bg-primary/5 border border-primary/20 rounded-lg p-4">

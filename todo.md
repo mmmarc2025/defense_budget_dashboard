@@ -90,3 +90,9 @@
 - [x] 實作彈出視窗組件（Modal）
 - [x] 實作「查看詳細規格」按鈕點擊功能
 - [x] 測試所有項目的彈出視窗
+
+## Add Weapon System Images
+- [x] 搜尋並下載8個武器系統的圖片（HIMARS、M109A7、Altius、TTN、Javelin、TOW、AH-1W、Harpoon）
+- [x] 更新資料結構以包含圖片路徑
+- [x] 更新彈出視窗組件以顯示武器圖片
+- [x] 測試所有項目的圖片顯示
