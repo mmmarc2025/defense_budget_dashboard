@@ -102,7 +102,7 @@ export default function Home() {
             </h2>
             
             <p className="text-lg text-muted-foreground max-w-2xl mb-10 leading-relaxed border-l-4 border-primary/50 pl-6">
-              76%依賴美國軍購、6,880億積壓未交付、預算透明度嚴重不足。
+              對外採購約72%（9,000億元）、6,880億積壓未交付、預算透明度嚴重不足。
               六度遭藍白擋下的特別預算，<span className="text-destructive font-bold">究竟隱藏了什麼？</span>
               透過數據視覺化，揭露國防預算背後的真相與潛在風險。
             </p>
@@ -158,13 +158,13 @@ export default function Home() {
             </div>
           </DashboardCard>
 
-          <DashboardCard title="對美軍購占比" icon={<Globe className="w-5 h-5" />}>
+          <DashboardCard title="對外採購占比" icon={<Globe className="w-5 h-5" />}>
             <div className="flex flex-col h-full justify-between">
               <div className="text-4xl font-mono font-bold text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]">
-                76%
+                72%
               </div>
-              <p className="text-sm text-muted-foreground mt-2">約 NT$ 9,500 億</p>
-              <p className="text-xs text-primary/70 mt-1">高度依賴美方</p>
+              <p className="text-sm text-muted-foreground mt-2">約 NT$ 9,000 億</p>
+              <p className="text-xs text-primary/70 mt-1">高度依賴對外採購</p>
             </div>
           </DashboardCard>
 
@@ -360,7 +360,7 @@ export default function Home() {
                       國防自主比例過低
                     </h4>
                     <p className="text-sm text-muted-foreground">
-                      美方獲76%預算份額，中科院與國內廠商僅占24%，技術轉移與產業效益受限。
+                      對外採購約72%（9,000億元），國內產製僅28%（3,000億元），技術轉移與產業效益受限。
                     </p>
                   </div>
                   
