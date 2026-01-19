@@ -20,11 +20,11 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<"overview" | "budget" | "sales" | "backlog">("overview");
 
   // Prepare chart data for overview
-  const budgetChartData = budgetData.items.map(item => ({
+  const budgetChartData = budgetData.items.map((item, index) => ({
     name: item.name.length > 8 ? item.name.substring(0, 8) + "..." : item.name,
     fullName: item.name,
     value: item.value,
-    color: item.isUnspecified ? "#ff2a2a" : "#00f0ff"
+    color: index === 0 ? "#00f0ff" : `rgba(0, 240, 255, ${0.9 - index * 0.1})`
   }));
 
   const backlogChartData = backlogData.items.map(item => ({
@@ -57,25 +57,25 @@ export default function Home() {
           <div className="flex items-center gap-4">
             <ThemeSwitcher />
             <nav className="hidden md:flex gap-1">
-            {[
-              { id: "overview", label: "總覽儀表板" },
-              { id: "budget", label: "預算結構" },
-              { id: "sales", label: "軍售清單" },
-              { id: "backlog", label: "積壓分析" }
-            ].map(tab => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id as any)}
-                className={`px-4 py-2 text-sm font-bold uppercase tracking-wider transition-all border-b-2 ${
-                  activeTab === tab.id 
-                    ? "border-primary text-primary bg-primary/10" 
-                    : "border-transparent text-muted-foreground hover:text-primary hover:bg-primary/5"
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </nav>
+              {[
+                { id: "overview", label: "總覽儀表板" },
+                { id: "budget", label: "預算結構" },
+                { id: "sales", label: "軍售清單" },
+                { id: "backlog", label: "積壓分析" }
+              ].map(tab => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id as any)}
+                  className={`px-4 py-2 text-sm font-bold uppercase tracking-wider transition-all border-b-2 ${
+                    activeTab === tab.id 
+                      ? "border-primary text-primary bg-primary/10" 
+                      : "border-transparent text-muted-foreground hover:text-primary hover:bg-primary/5"
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </nav>
           </div>
         </div>
       </header>

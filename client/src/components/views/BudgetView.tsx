@@ -5,16 +5,14 @@ import { AlertTriangle, Info, PieChart } from "lucide-react";
 import { Bar, BarChart, Cell, Legend, Pie, PieChart as RechartsPieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 export function BudgetView() {
-  const budgetChartData = budgetData.items.map(item => ({
+  const budgetChartData = budgetData.items.map((item, index) => ({
     name: item.name,
     value: item.value,
-    color: item.isUnspecified ? "#ff2a2a" : "#00f0ff",
+    color: index === 0 ? "#00f0ff" : `rgba(0, 240, 255, ${0.9 - index * 0.1})`,
     description: item.description
   }));
 
   const totalBudget = budgetData.total;
-  const unspecifiedBudget = budgetData.items.find(i => i.isUnspecified)?.value || 0;
-  const unspecifiedPercentage = ((unspecifiedBudget / totalBudget) * 100).toFixed(1);
 
   return (
     <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -49,44 +47,27 @@ export function BudgetView() {
 
         {/* Analysis & Highlights */}
         <div className="space-y-6">
-          <DashboardCard title="預算透明度警示" icon={<AlertTriangle className="w-5 h-5" />} variant="danger">
+          <DashboardCard title="預算規模與期程" icon={<Info className="w-5 h-5" />}>
             <div className="flex flex-col items-center justify-center py-6 text-center">
-              <div className="relative w-40 h-40 mb-4">
-                <ResponsiveContainer width="100%" height="100%">
-                  <RechartsPieChart>
-                    <Pie
-                      data={[
-                        { name: "未說明", value: unspecifiedBudget, color: "#ff2a2a" },
-                        { name: "已說明", value: totalBudget - unspecifiedBudget, color: "#00f0ff" }
-                      ]}
-                      cx="50%"
-                      cy="50%"
-                      innerRadius={60}
-                      outerRadius={80}
-                      paddingAngle={5}
-                      dataKey="value"
-                    >
-                      <Cell fill="#ff2a2a" />
-                      <Cell fill="rgba(0, 240, 255, 0.2)" />
-                    </Pie>
-                  </RechartsPieChart>
-                </ResponsiveContainer>
-                <div className="absolute inset-0 flex items-center justify-center flex-col">
-                  <span className="text-3xl font-bold text-destructive">{unspecifiedPercentage}%</span>
-                  <span className="text-xs text-muted-foreground">未詳細說明</span>
+              <div className="mb-4">
+                <div className="text-5xl font-mono font-bold text-primary drop-shadow-[0_0_10px_rgba(0,240,255,0.5)]">
+                  NT$ 1.25 <span className="text-2xl">兆</span>
+                </div>
+                <div className="text-sm text-muted-foreground mt-2">
+                  {budgetData.period} （8年）
                 </div>
               </div>
               <p className="text-sm text-muted-foreground mb-4">
-                預算中約有 <span className="text-destructive font-bold">{formatCurrency(unspecifiedBudget)}</span> 被列為「未詳細說明項目」或機密預算，缺乏具體用途說明。
+                國防部已公開七大品項類別，涵蓋對美軍購、與美合作研發、國造等範疇。
               </p>
-              <div className="w-full bg-destructive/10 border border-destructive/20 p-3 rounded text-left">
-                <h4 className="text-xs font-bold text-destructive mb-1 flex items-center gap-1">
-                  <Info className="w-3 h-3" /> 潛在風險
+              <div className="w-full bg-primary/10 border border-primary/20 p-3 rounded text-left">
+                <h4 className="text-xs font-bold text-primary mb-1 flex items-center gap-1">
+                  <Info className="w-3 h-3" /> 重點特色
                 </h4>
                 <ul className="text-xs text-muted-foreground list-disc list-inside space-y-1">
-                  <li>國會監督困難</li>
-                  <li>資金流向不明</li>
-                  <li>可能包含爭議性採購</li>
+                  <li>約20萬架無人機、1,000餘艘無人艇</li>
+                  <li>HIMARS 82套、M109A7 60門</li>
+                  <li>強化彈藥產線與甲車組裝線</li>
                 </ul>
               </div>
             </div>

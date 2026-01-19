@@ -2,18 +2,36 @@ export const budgetData = {
   total: 1250000000000, // 1.25兆 TWD
   period: "2026-2033",
   items: [
-    { name: "精準火炮", value: 150000000000, description: "M109A7自走榴彈砲等" },
-    { name: "遠程精準打擊飛彈", value: 250000000000, description: "HIMARS、ATACMS等" },
-    { name: "防空反彈道及反裝甲飛彈", value: 200000000000, description: "標槍、TOW等" },
-    { name: "無人載具及其反制系統", value: 120000000000, description: "Altius無人機等" },
-    { name: "強化作戰持續量能相關裝備", value: 180000000000, description: "彈藥補給等" },
-    { name: "AI輔助C4ISR系統", value: 150000000000, description: "台灣戰術網路(TTN)、部隊覺知應用套件(TAK)" },
-    { name: "台美共同研發採購裝備系統", value: 100000000000, description: "未詳細說明" },
-    { name: "未詳細說明項目", value: 100000000000, description: "其他機密或未公開項目", isUnspecified: true }
+    { name: "精準火炮", value: 150000000000, description: "M109A7自走砲60門、精準彈藥4,080發" },
+    { name: "遠程精準打擊飛彈", value: 250000000000, description: "HIMARS 82套、戰術區域飛彈420枚" },
+    { name: "無人載具及反制系統", value: 200000000000, description: "約20萬架無人機、1,000餘艘無人艇" },
+    { name: "防空反彈道及反裝甲飛彈", value: 180000000000, description: "標槍70套、拖式2B 24套" },
+    { name: "AI輔助與C5ISR", value: 120000000000, description: "AI決策支援、戰術網路、情資分享套件" },
+    { name: "強化作戰持續量能相關裝備", value: 200000000000, description: "彈藥產線、甲車組裝線、夜視鏡產線等" },
+    { name: "台美共同研發及採購合作", value: 150000000000, description: "新興科技系統（機密）" }
   ]
 };
 
 export const armsSales2025 = [
+  {
+    id: 0,
+    name: "無人載具大軍：20萬架無人機、1,000餘艘無人艇",
+    image: "/images/uav-fleet.jpg",
+    amountUSD: 3000000000,
+    amountTWD: 94500000000,
+    details: "濱海監偵型、濱海攻擊型（沉浸、投彈、自殺）等各類無人機約20萬架、無人艇1,000餘艘",
+    status: "Planned",
+    deliveryDate: "2026-2033",
+    fullDescription: "國防部首次公開的無人載具採購規模達約20萬架無人機、1,000餘艘無人艇，涵蓋濱海監偵型、濱海攻擊型（沉浸、投彈、自殺）等多種用途。這是台灣史上最大規模的無人載具採購計畫，旨在建立不對稱戰力與蜂群作戰能力。",
+    specifications: [
+      { label: "總數量", value: "約20萬架無人機 + 1,000餘艘無人艇" },
+      { label: "類型", value: "濱海監偵型、攻擊型（沉浸、投彈、自殺）" },
+      { label: "作戰模式", value: "蜂群作戰、精準打擊、持續監控" },
+      { label: "部署範圍", value: "海岸線、海域、灣區" },
+      { label: "特點", value: "低成本、高效能、難以拐截" }
+    ],
+    tacticalValue: "大量部署無人載具可形成「蜂群戰術」，以數量優勢壓倒敵方防空系統。無人艇可在海岸線形成多層次防禦，有效阻止敵方登陸艦隊接近。烏克蘭戰爭證明無人載具在現代戰爭中具有極高戰術價值。"
+  },
   {
     id: 1,
     name: "HIMARS與ATACMS系統",
